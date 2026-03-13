@@ -10,20 +10,21 @@ function updateUI() {
     debtList.innerHTML = '';
     let total = 0;
 
-    debts.forEach((debt) => {
-        total += parseFloat(debt.amount);
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td class="date-text">${debt.date}</td>
-            <td>${debt.client}</td>
-            <td>$${parseFloat(debt.amount).toLocaleString()}</td>
-            <td>
-                <button class="edit-btn" onclick="prepareEdit('${debt.id}')">Editar</button>
-                <button class="delete-btn" onclick="removeDebt('${debt.id}')">X</button>
-            </td>
-        `;
-        debtList.appendChild(row);
-    });
+    // Dentro de updateUI()...
+debts.forEach((debt) => {
+    total += parseFloat(debt.amount);
+    const row = document.createElement('tr');
+    row.innerHTML = `
+        <td data-label="Fecha">${debt.date}</td>
+        <td data-label="Cliente">${debt.client}</td>
+        <td data-label="Monto">$${parseFloat(debt.amount).toLocaleString()}</td>
+        <td data-label="Acciones">
+            <button class="edit-btn" onclick="prepareEdit('${debt.id}')">Editar</button>
+            <button class="delete-btn" onclick="removeDebt('${debt.id}')">Eliminar</button>
+        </td>
+    `;
+    debtList.appendChild(row);
+});
 
     totalDisplay.innerText = `$${total.toLocaleString()}`;
     localStorage.setItem('debts', JSON.stringify(debts));

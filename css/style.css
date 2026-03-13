@@ -8,67 +8,108 @@
     --input-bg: #2c2c2c;
 }
 
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
-    display: flex;
-    justify-content: center;
-    padding: 20px;
+    line-height: 1.6;
+    padding: 10px;
 }
 
 .container {
     background: var(--card-bg);
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     width: 100%;
-    max-width: 800px;
+    max-width: 900px;
+    margin: 20px auto;
 }
 
-h1 { color: var(--accent-color); text-align: center; }
+h1 { color: var(--accent-color); text-align: center; margin-bottom: 1.5rem; font-size: 1.8rem; }
 
-form { display: flex; gap: 10px; margin-bottom: 25px; }
+/* Formulario Responsivo */
+form { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 15px; 
+    margin-bottom: 25px; 
+}
 
 input {
     background: var(--input-bg);
     border: 1px solid #444;
     color: white;
-    padding: 12px;
-    border-radius: 6px;
-    flex: 1;
+    padding: 14px;
+    border-radius: 8px;
+    width: 100%;
+    font-size: 1rem;
 }
 
-button {
+#submit-btn {
     background-color: var(--accent-color);
     color: #000;
     font-weight: bold;
     border: none;
-    padding: 10px 20px;
-    border-radius: 6px;
+    padding: 14px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: 0.3s;
+    font-size: 1rem;
 }
 
-button:hover { opacity: 0.8; }
-
-.table-container { overflow-x: auto; }
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-th, td {
+.summary {
+    text-align: center;
+    background: #2a2a2a;
     padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid #333;
+    border-radius: 8px;
+    margin-bottom: 20px;
 }
 
-th { color: var(--accent-color); }
+/* --- MAGIA DEL RESPONSIVE PARA TABLAS --- */
 
-.edit-btn { background-color: var(--success-color); margin-right: 5px; color: #000; }
-.delete-btn { background-color: var(--danger-color); color: white; }
+table { width: 100%; border-collapse: collapse; }
 
-.date-text { font-size: 0.8rem; color: #888; }
+/* Pantallas grandes (Escritorio) */
+@media (min-width: 600px) {
+    form { flex-direction: row; }
+    th, td { padding: 15px; text-align: left; border-bottom: 1px solid #333; }
+    th { color: var(--accent-color); text-transform: uppercase; font-size: 0.85rem; }
+}
+
+/* Pantallas pequeñas (Móviles) */
+@media (max-width: 599px) {
+    table, thead, tbody, th, td, tr { 
+        display: block; 
+    }
+
+    thead tr { display: none; } /* Escondemos los encabezados originales */
+
+    tr {
+        margin-bottom: 15px;
+        border: 1px solid #444;
+        border-radius: 8px;
+        padding: 10px;
+        background: #252525;
+    }
+
+    td {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 5px;
+        border-bottom: 1px solid #333;
+    }
+
+    td:last-child { border-bottom: none; justify-content: center; gap: 10px; }
+
+    /* Añadimos etiquetas antes del contenido */
+    td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: var(--accent-color);
+    }
+}
+
+.edit-btn { background-color: var(--success-color); color: #000; padding: 8px 15px; border-radius: 4px; border: none; cursor: pointer; }
+.delete-btn { background-color: var(--danger-color); color: white; padding: 8px 15px; border-radius: 4px; border: none; cursor: pointer; }
