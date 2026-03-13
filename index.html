@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Deudas</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Control de Deudas</h1>
+        
+        <form id="debt-form">
+            <input type="text" id="client" placeholder="Nombre del cliente" required>
+            <input type="number" id="amount" placeholder="Monto ($)" required>
+            <button type="submit" id="submit-btn">Agregar</button>
+        </form>
+
+        <div class="summary">
+            <h3>Total Pendiente: <span id="total-debt">$0</span></h3>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fecha/Hora</th>
+                        <th>Cliente</th>
+                        <th>Monto</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="debt-list"></tbody>
+            </table>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
